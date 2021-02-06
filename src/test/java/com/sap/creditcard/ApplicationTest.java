@@ -11,9 +11,8 @@ import static com.sap.creditcard.Application.main;
 @SpringBootTest
 public class ApplicationTest {
 
-    @Test
-    public void contextLoads() {
-        main(new String[]{});
-    }
-
+  @Test
+  public void contextLoads() {
+    main(new String[]{});
+  }
 }

@@ -18,7 +18,8 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.sap.creditcard"))
                 .paths(PathSelectors.any())
-                .build().apiInfo(apiInfo());
+                .build()
+                .apiInfo(apiInfo());
     }
 
     private ApiInfo apiInfo() {

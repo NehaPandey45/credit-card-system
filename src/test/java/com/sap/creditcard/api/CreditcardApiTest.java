@@ -31,58 +31,59 @@ import static org.mockito.ArgumentMatchers.any;
 @AutoConfigureMockMvc
 public class CreditcardApiTest {
 
-    @InjectMocks
-    private CreditcardApi creditcardApi;
+  @InjectMocks
+  private CreditcardApi creditcardApi;
 
-    @Autowired
-    private MockMvc mockMvc;
+  @Autowired
+  private MockMvc mockMvc;
 
-    @Mock
-    private CreditcardService creditcardService;
+  @Mock
+  private CreditcardService creditcardService;
 
-    @Before
-    public void init() {
-        MockitoAnnotations.initMocks(this);
-        this.mockMvc = MockMvcBuilders.standaloneSetup(creditcardApi).build();
+  @Before
+  public void init() {
+    MockitoAnnotations.initMocks(this);
+    this.mockMvc = MockMvcBuilders.standaloneSetup(creditcardApi).build();
 
-        Creditcard creditcard = new Creditcard();
-        creditcard.setUserName("testUser");
-        creditcard.setCardNumber("12345678903555");
-        creditcard.setCardLimit(100.0);
-        List<Creditcard> creditcardList = new ArrayList<Creditcard>();
-        creditcardList.add(creditcard);
+    Creditcard creditcard = new Creditcard();
+    creditcard.setUserName("testUser");
+    creditcard.setCardNumber("12345678903555");
+    creditcard.setCardLimit(100.0);
+    List<Creditcard> creditcardList = new ArrayList<>();
+    creditcardList.add(creditcard);
 
-        Mockito.when(creditcardService.save(any(Creditcard.class))).thenReturn(creditcard);
-        Mockito.when(creditcardService.findAll()).thenReturn(creditcardList);
-    }
+    Mockito.when(creditcardService.save(any(Creditcard.class))).thenReturn(creditcard);
+    Mockito.when(creditcardService.findAll()).thenReturn(creditcardList);
+  }
 
-    @Test
-    public void add() throws Exception {
-        final String url = "/creditcard/add";
+  @Test
+  public void add() throws Exception {
+    final String url = "/creditcard/add";
 
-        final String requestJSONContent = "{\n" +
-                " \"userName\" : \"testUser\",\n" +
-                " \"cardNumber\" : \"12345678903555\",\n" +
-                " \"cardlimit\": \"100.0\"\n" +
-                "}";
+    final String requestJSONContent =
+            "{\n"
+                    + " \"userName\" : \"testUser\",\n"
+                    + " \"cardNumber\" : \"12345678903555\",\n"
+                    + " \"cardlimit\": \"100.0\"\n"
+                    + "}";
 
-        RequestBuilder requestBuilder =
-                MockMvcRequestBuilders.post(url)
-                        .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-                        .content(requestJSONContent);
+    RequestBuilder requestBuilder =
+            MockMvcRequestBuilders.post(url)
+                    .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                    .content(requestJSONContent);
 
-        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-        assertEquals(200, result.getResponse().getStatus());
-    }
+    MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+    assertEquals(200, result.getResponse().getStatus());
+  }
 
-    @Test
-    public void getAll() throws Exception {
-        final String url = "/creditcard/getAll";
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(url);
-        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-        final String contentAsString = result.getResponse().getContentAsString();
-        assertEquals(200, result.getResponse().getStatus());
-        assertNotNull(contentAsString);
-        assertFalse(contentAsString.isEmpty());
-    }
+  @Test
+  public void getAll() throws Exception {
+    final String url = "/creditcard/getAll";
+    RequestBuilder requestBuilder = MockMvcRequestBuilders.get(url);
+    MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+    final String contentAsString = result.getResponse().getContentAsString();
+    assertEquals(200, result.getResponse().getStatus());
+    assertNotNull(contentAsString);
+    assertFalse(contentAsString.isEmpty());
+  }
 }

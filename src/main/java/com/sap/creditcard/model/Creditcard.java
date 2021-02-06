@@ -14,22 +14,15 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Creditcard {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private int id;
 
-    private String userName;
+  private String userName;
 
-    private String cardNumber;
+  private String cardNumber;
 
-    private Double cardLimit = 0.0d;
+  private Double cardLimit = 0.0d;
 
-    private Double accountBalance = 0.0d;
-
-    public Creditcard(String userName, String cardNumber, Double cardLimit, Double accountBalance) {
-        this.userName = userName;
-        this.cardNumber = cardNumber;
-        this.cardLimit = cardLimit;
-        this.accountBalance = accountBalance;
-    }
+  private Double accountBalance = 0.0d;
 }

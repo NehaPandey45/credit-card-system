@@ -16,25 +16,41 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 public class CreditcardRepositoryTest {
 
-    @Autowired
-    private TestEntityManager entityManager;
+  @Autowired
+  private TestEntityManager entityManager;
 
-    @Autowired
-    private CreditcardRepository creditcardRepository;
+  @Autowired
+  private CreditcardRepository creditcardRepository;
 
-    @Test
-    public void givenSetOfCreditcards_whenFindAll_thenReturnAllCreditcards() {
-        Creditcard test1 = new Creditcard("test1", "12345678903555", 100.0, 0.0);
-        Creditcard test2 = new Creditcard("test2", "12345678903556", 200.0, 0.0);
-        Creditcard test3 = new Creditcard("test3", "12345678903557", 300.0, 0.0);
+  @Test
+  public void givenSetOfCreditcards_whenFindAll_thenReturnAllCreditcards() {
+    Creditcard test1 = new Creditcard();
+    test1.setUserName("test1");
+    test1.setCardNumber("12345678903556");
+    test1.setAccountBalance(200.0);
+    test1.setCardLimit(0.0);
 
-        entityManager.persist(test1);
-        entityManager.persist(test2);
-        entityManager.persist(test3);
-        entityManager.flush();
+    Creditcard test2 = new Creditcard();
+    test2.setUserName("test1");
+    test2.setCardNumber("12345678903556");
+    test2.setAccountBalance(200.0);
+    test2.setCardLimit(0.0);
 
-        List<Creditcard> allCreditCards = creditcardRepository.findAll();
-        assertThat(allCreditCards).hasSize(3).extracting(Creditcard::getUserName).containsOnly(test1.getUserName(), test2.getUserName(), test3.getUserName());
-    }
+    Creditcard test3 = new Creditcard();
+    test3.setUserName("test1");
+    test3.setCardNumber("12345678903556");
+    test3.setAccountBalance(200.0);
+    test3.setCardLimit(0.0);
 
+    entityManager.persist(test1);
+    entityManager.persist(test2);
+    entityManager.persist(test3);
+    entityManager.flush();
+
+    List<Creditcard> allCreditCards = creditcardRepository.findAll();
+    assertThat(allCreditCards)
+            .hasSize(3)
+            .extracting(Creditcard::getUserName)
+            .containsOnly(test1.getUserName(), test2.getUserName(), test3.getUserName());
+  }
 }
