@@ -15,20 +15,23 @@ import java.util.List;
 @RequestMapping(value = "/creditcard")
 @Api(value = "Credit card provider", produces = "application/json")
 public class CreditcardApi {
-    @Autowired
-    CreditcardService creditcardService;
+  @Autowired
+  CreditcardService creditcardService;
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+  Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @ApiOperation(value = "Create a new credit card for a given name, card number, and limit", produces = "application/json")
-    @PostMapping("/add")
-    public Creditcard save(@RequestBody final Creditcard creditcard) {
-        return creditcardService.save(creditcard);
-    }
+  @ApiOperation(
+          value = "Create a new credit card for a given name, card number, and limit",
+          produces = "application/json"
+  )
+  @PostMapping("/add")
+  public Creditcard save(@RequestBody final Creditcard creditcard) {
+    return creditcardService.save(creditcard);
+  }
 
-    @ApiOperation(value = "Returns all cards in the system", produces = "application/json")
-    @GetMapping("/getAll")
-    public List<Creditcard> getAll() {
-        return creditcardService.findAll();
-    }
+  @ApiOperation(value = "Returns all cards in the system", produces = "application/json")
+  @GetMapping("/getAll")
+  public List<Creditcard> getAll() {
+    return creditcardService.findAll();
+  }
 }

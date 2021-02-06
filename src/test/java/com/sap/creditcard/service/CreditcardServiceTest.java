@@ -51,9 +51,9 @@ public class CreditcardServiceTest {
     public void save() {
         final Creditcard got = creditcardService.save(new Creditcard());
         Assert.assertNotNull(got);
-        Assert.assertTrue(got.getCardNumber().equalsIgnoreCase("12345678903555"));
-        Assert.assertTrue(got.getUserName().equalsIgnoreCase("premium user"));
-        Assert.assertTrue(got.getAccountBalance().equals(100.0));
+        Assert.assertEquals(got.getCardNumber(), "12345678903555");
+        Assert.assertEquals(got.getUserName(), "premium user");
+        Assert.assertEquals(got.getAccountBalance(), equals(100.0));
         Assert.assertTrue(got.getCardLimit().equals(500.0));
     }
 
