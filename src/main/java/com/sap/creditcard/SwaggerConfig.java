@@ -9,9 +9,19 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * The creditcard Swagger config.
+ */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+    /**
+     * This is swagger Config which is used to generate Swagger of API
+     *
+     * <p>Swagger can be refered from below endpoint in browser: http://localhost:8080/swagger-ui.html
+     *
+     * @return the docket
+     */
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
