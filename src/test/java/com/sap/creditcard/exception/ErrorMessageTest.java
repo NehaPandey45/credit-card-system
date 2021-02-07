@@ -1,10 +1,10 @@
 package com.sap.creditcard.exception;
 
-import org.junit.jupiter.api.Test;
-import pl.pojo.tester.api.assertion.Method;
-
 import static pl.pojo.tester.api.FieldPredicate.exclude;
 import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
+
+import org.junit.jupiter.api.Test;
+import pl.pojo.tester.api.assertion.Method;
 
 public class ErrorMessageTest {
 
@@ -13,28 +13,28 @@ public class ErrorMessageTest {
     final Class<?> model = ErrorMessage.class;
 
     assertPojoMethodsFor(model, exclude("TYPE"))
-            .testing(Method.EQUALS)
-            .quickly()
-            .areWellImplemented();
+        .testing(Method.EQUALS)
+        .quickly()
+        .areWellImplemented();
 
     assertPojoMethodsFor(model, exclude("TYPE"))
-            .testing(Method.HASH_CODE)
-            .quickly()
-            .areWellImplemented();
+        .testing(Method.HASH_CODE)
+        .quickly()
+        .areWellImplemented();
 
     assertPojoMethodsFor(model, exclude("TYPE"))
-            .testing(Method.GETTER)
-            .quickly()
-            .areWellImplemented();
+        .testing(Method.GETTER)
+        .quickly()
+        .areWellImplemented();
 
     assertPojoMethodsFor(model, exclude("TYPE"))
-            .testing(Method.SETTER)
-            .quickly()
-            .areWellImplemented();
+        .testing(Method.SETTER)
+        .quickly()
+        .areWellImplemented();
 
     assertPojoMethodsFor(model, exclude("TYPE"))
-            .testing(Method.TO_STRING)
-            .quickly()
-            .areWellImplemented();
+        .testing(Method.TO_STRING)
+        .quickly()
+        .areWellImplemented();
   }
 }

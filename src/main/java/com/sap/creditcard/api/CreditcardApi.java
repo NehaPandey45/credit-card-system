@@ -6,14 +6,13 @@ import com.sap.creditcard.model.Creditcard;
 import com.sap.creditcard.service.CreditcardService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.List;
 
 /**
  * The Creditcard Controller Class. It provides 2 API to Save and add data. Please refer swagger
@@ -24,18 +23,17 @@ import java.util.List;
 @Api(value = "Credit card provider", produces = "application/json")
 public class CreditcardApi {
 
-  @Autowired
-  CreditcardService creditcardService;
+  @Autowired CreditcardService creditcardService;
 
   Logger logger = LoggerFactory.getLogger(this.getClass());
 
   @ApiOperation(
-          value = "Create a new credit card for a given name, card number, and limit",
-          produces = "application/json"
+    value = "Create a new credit card for a given name, card number, and limit",
+    produces = "application/json"
   )
   @PostMapping("/add")
   public Creditcard save(
-          @Valid @RequestBody final Creditcard creditcard, BindingResult bindingResult) {
+      @Valid @RequestBody final Creditcard creditcard, BindingResult bindingResult) {
 
     errorHandler(bindingResult);
     return creditcardService.save(creditcard);
@@ -48,7 +46,7 @@ public class CreditcardApi {
 
         logger.error("Invalid Credit card Number passed");
         throw new InvalidCrediCardException(
-                "Invalid Credit card Number passed, please check input request");
+            "Invalid Credit card Number passed, please check input request");
 
       } else if (bindingResult.hasFieldErrors("userName")) {
 
@@ -64,7 +62,7 @@ public class CreditcardApi {
 
         logger.error("Invalid accountBalance passed");
         throw new InvalidUserNameException(
-                "Invalid accountBalance passed, please check input request");
+            "Invalid accountBalance passed, please check input request");
       }
     }
   }

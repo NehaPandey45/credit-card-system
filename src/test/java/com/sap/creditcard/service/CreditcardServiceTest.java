@@ -1,7 +1,13 @@
 package com.sap.creditcard.service;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
 import com.sap.creditcard.model.Creditcard;
 import com.sap.creditcard.repository.CreditcardRepository;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,21 +16,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
 @RunWith(SpringRunner.class)
 public class CreditcardServiceTest {
 
-  @Mock
-  CreditcardRepository creditcardRepository;
+  @Mock CreditcardRepository creditcardRepository;
 
-  @InjectMocks
-  CreditcardService creditcardService;
+  @InjectMocks CreditcardService creditcardService;
 
   private List<Creditcard> creditcardList = new ArrayList<>();
   private Creditcard creditcardUser1 = new Creditcard();

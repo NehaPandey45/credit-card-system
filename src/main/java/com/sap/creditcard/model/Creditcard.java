@@ -1,14 +1,13 @@
 package com.sap.creditcard.model;
 
 import com.sap.creditcard.validation.annotation.CreditcardAnnotation;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import java.math.BigDecimal;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * This is the base model of CreditCard id - Auto generated and acts as primary key userName - Name
@@ -34,9 +33,7 @@ public class Creditcard {
   @CreditcardAnnotation
   private String cardNumber;
 
-  @NotNull
-  private BigDecimal cardLimit;
+  @NotNull private BigDecimal cardLimit;
 
-  @NotNull
-  private BigDecimal accountBalance = BigDecimal.valueOf(0.0);
+  @NotNull private BigDecimal accountBalance = BigDecimal.valueOf(0.0);
 }

@@ -2,10 +2,9 @@ package com.sap.creditcard.validation;
 
 import com.sap.creditcard.util.Constants;
 import com.sap.creditcard.validation.annotation.CreditcardAnnotation;
-
+import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.regex.Pattern;
 
 /**
  * CreditCardValidator Class is a validator class that checks if the given Creditcard number is
@@ -20,19 +19,18 @@ import java.util.regex.Pattern;
 public class CreditCardValidator implements ConstraintValidator<CreditcardAnnotation, String> {
 
   @Override
-  public void initialize(CreditcardAnnotation constraintAnnotation) {
-  }
+  public void initialize(CreditcardAnnotation constraintAnnotation) {}
 
   @Override
   public boolean isValid(
-          String creditCardNumber, ConstraintValidatorContext constraintValidatorContext) {
+      String creditCardNumber, ConstraintValidatorContext constraintValidatorContext) {
     return checkLuhnTen(creditCardNumber);
   }
 
   private boolean checkLuhnTen(String creditCardNumber) {
     if (creditCardNumber == null
-            || creditCardNumber.length() > Constants.CREDITCARDLENGTH
-            || !Pattern.compile(Constants.DIGITREGEX).matcher(creditCardNumber).matches()) {
+        || creditCardNumber.length() > Constants.CREDITCARDLENGTH
+        || !Pattern.compile(Constants.DIGITREGEX).matcher(creditCardNumber).matches()) {
       return false;
     }
 
