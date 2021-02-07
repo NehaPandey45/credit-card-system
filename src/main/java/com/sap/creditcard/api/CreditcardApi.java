@@ -4,8 +4,7 @@ import com.sap.creditcard.exception.InvalidCrediCardException;
 import com.sap.creditcard.exception.InvalidUserNameException;
 import com.sap.creditcard.model.Creditcard;
 import com.sap.creditcard.service.CreditcardService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import java.util.List;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -28,8 +27,20 @@ public class CreditcardApi {
   Logger logger = LoggerFactory.getLogger(this.getClass());
 
   @ApiOperation(
-    value = "Create a new credit card for a given name, card number, and limit",
+    value =
+        "Create a new credit card for a given name, card number that passes luhn10 algorithm, limit and balance",
     produces = "application/json"
+  )
+  @ApiResponses(
+    value = {
+      @ApiResponse(code = 200, message = "created"),
+      @ApiResponse(code = 400, message = "Bad request"),
+      @ApiResponse(code = 404, message = "Not Found"),
+      @ApiResponse(code = 405, message = "Method Not Allowed"),
+      @ApiResponse(code = 406, message = "Not Acceptable"),
+      @ApiResponse(code = 415, message = "Unsupported Media Type"),
+      @ApiResponse(code = 500, message = "Internal Server Error")
+    }
   )
   @PostMapping("/add")
   public Creditcard save(
