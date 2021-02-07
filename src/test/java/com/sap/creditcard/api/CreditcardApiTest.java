@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class CreditcardApiTest {
     Creditcard creditcard = new Creditcard();
     creditcard.setUserName("testUser");
     creditcard.setCardNumber("12345678903555");
-    creditcard.setCardLimit(100.0);
+    creditcard.setCardLimit(BigDecimal.valueOf(100));
     List<Creditcard> creditcardList = new ArrayList<>();
     creditcardList.add(creditcard);
 
@@ -57,14 +58,14 @@ public class CreditcardApiTest {
   }
 
   @Test
-  public void add() throws Exception {
+  public void add_no_balance_default_should_be_zero() throws Exception {
     final String url = "/creditcard/add";
 
     final String requestJSONContent =
             "{\n"
-                    + " \"userName\" : \"testUser\",\n"
+                    + " \"userName\" : \"test\",\n"
                     + " \"cardNumber\" : \"12345678903555\",\n"
-                    + " \"cardlimit\": \"100.0\"\n"
+                    + " \"cardLimit\": \"100.0\"\n"
                     + "}";
 
     RequestBuilder requestBuilder =
@@ -74,6 +75,86 @@ public class CreditcardApiTest {
 
     MvcResult result = mockMvc.perform(requestBuilder).andReturn();
     assertEquals(200, result.getResponse().getStatus());
+  }
+
+  @Test
+  public void add_correct_data() throws Exception {
+    final String url = "/creditcard/add";
+
+    final String requestJSONContent =
+            "{\n"
+                    + " \"userName\" : \"testUser\",\n"
+                    + " \"cardNumber\" : \"12345678903555\",\n"
+                    + " \"cardLimit\": \"100.0\",\n"
+                    + "  \"accountBalance\": \"100.0\"\n"
+                    + "}";
+
+    RequestBuilder requestBuilder =
+            MockMvcRequestBuilders.post(url)
+                    .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                    .content(requestJSONContent);
+
+    MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+    assertEquals(200, result.getResponse().getStatus());
+  }
+
+  @Test(expected = Exception.class)
+  public void add_blank_userName() throws Exception {
+    final String url = "/creditcard/add";
+
+    final String requestJSONContent =
+            "{\n"
+                    + " \"userName\" : \"\",\n"
+                    + " \"cardNumber\" : \"12345678903555\",\n"
+                    + " \"cardlimit\": \"100.0\"\n"
+                    + "}";
+
+    RequestBuilder requestBuilder =
+            MockMvcRequestBuilders.post(url)
+                    .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                    .content(requestJSONContent);
+
+    assertEquals(404, mockMvc.perform(requestBuilder).andReturn().getResponse().getStatus());
+  }
+
+  @Test(expected = Exception.class)
+  public void add_wrongCardNumber() throws Exception {
+    final String url = "/creditcard/add";
+
+    final String requestJSONContent =
+            "{\n"
+                    + " \"userName\" : \"testUser1\",\n"
+                    + " \"cardNumber\" : \"12345678903556\",\n"
+                    + " \"cardlimit\": \"100.0\"\n"
+                    + "}";
+
+    RequestBuilder requestBuilder =
+            MockMvcRequestBuilders.post(url)
+                    .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                    .content(requestJSONContent);
+
+    MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+    assertEquals(404, result.getResponse().getStatus());
+  }
+
+  @Test(expected = Exception.class)
+  public void add_no_creditLimit() throws Exception {
+    final String url = "/creditcard/add";
+
+    final String requestJSONContent =
+            "{\n"
+                    + " \"userName\" : \"testUser3\",\n"
+                    + " \"cardNumber\" : \"12345678903555\",\n"
+                    + " \"cardlimit\": \"\"\n"
+                    + "}";
+
+    RequestBuilder requestBuilder =
+            MockMvcRequestBuilders.post(url)
+                    .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                    .content(requestJSONContent);
+
+    MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+    assertEquals(404, result.getResponse().getStatus());
   }
 
   @Test

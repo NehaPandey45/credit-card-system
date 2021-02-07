@@ -8,16 +8,34 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is the service layer to Interact with Repository {@link CreditcardRepository} which further
+ * insert/fetch data from DB
+ */
 @Service
 public class CreditcardService {
 
+    /**
+     * The Creditcard repository.
+     */
     @Autowired
     public CreditcardRepository creditcardRepository;
 
+    /**
+     * Save creditcard.
+     *
+     * @param creditcard the creditcard
+     * @return the creditcard
+     */
     public Creditcard save(Creditcard creditcard) {
         return creditcardRepository.save(creditcard);
     }
 
+    /**
+     * Find all list.
+     *
+     * @return the list
+     */
     public List<Creditcard> findAll() {
         return new ArrayList<>(creditcardRepository.findAll());
     }
