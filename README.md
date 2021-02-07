@@ -87,7 +87,7 @@ docker run \
  
  #To Format the Code we have used "fmt-maven-plugin". 
  
- # You can also generate the code coverage report for which we have used "Jacoco plugin"
+ #You can also generate the code coverage report for which we have used "Jacoco plugin"
  
  1) In order to generate Jacoco report for test coverage, please use below command:
      mvn clean verify
