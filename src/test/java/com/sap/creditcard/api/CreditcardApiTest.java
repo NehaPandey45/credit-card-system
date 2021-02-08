@@ -134,6 +134,48 @@ public class CreditcardApiTest {
   }
 
   @Test(expected = Exception.class)
+  public void add_invalidBalance_test() throws Exception {
+    final String url = "/creditcard/add";
+
+    final String requestJSONContent =
+        "{\n"
+            + " \"userName\" : \"test1\",\n"
+            + " \"cardNumber\" : \"12345678903555\",\n"
+            + " \"cardLimit\": \"2\",\n"
+            + " \"accountBalance\": \"99999999999999999999999999999\"\n"
+            + "}";
+
+    RequestBuilder requestBuilder =
+        MockMvcRequestBuilders.post(url)
+            .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+            .content(requestJSONContent);
+
+    MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+    assertEquals(404, result.getResponse().getStatus());
+  }
+
+  @Test(expected = Exception.class)
+  public void add_no_Balance_test() throws Exception {
+    final String url = "/creditcard/add";
+
+    final String requestJSONContent =
+        "{\n"
+            + " \"userName\" : \"test1\",\n"
+            + " \"cardNumber\" : \"12345678903555\",\n"
+            + " \"cardLimit\": \"2\",\n"
+            + " \"accountBalance\": \"\"\n"
+            + "}";
+
+    RequestBuilder requestBuilder =
+        MockMvcRequestBuilders.post(url)
+            .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+            .content(requestJSONContent);
+
+    MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+    assertEquals(404, result.getResponse().getStatus());
+  }
+
+  @Test(expected = Exception.class)
   public void add_no_creditLimit() throws Exception {
     final String url = "/creditcard/add";
 

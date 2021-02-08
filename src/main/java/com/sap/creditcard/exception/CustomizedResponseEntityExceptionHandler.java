@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -85,6 +86,25 @@ public class CustomizedResponseEntityExceptionHandler {
     logger.error(ex.getMessage());
     return new ErrorMessage(
         HttpStatus.NOT_FOUND.value(), new Date(), ex.getMessage(), request.getDescription(false));
+  }
+
+  /**
+   * HttpMessageNotReadableException
+   *
+   * @param ex the exception
+   * @param request the request
+   * @return errorMessage
+   */
+  @ExceptionHandler(HttpMessageNotReadableException.class)
+  @ResponseStatus(value = HttpStatus.NOT_FOUND)
+  public ErrorMessage handleHttpMessageNotReadableException(
+      HttpMessageNotReadableException ex, WebRequest request) {
+    logger.error(ex.getMessage());
+    return new ErrorMessage(
+        HttpStatus.NOT_FOUND.value(),
+        new Date(),
+        "Invalid input passed " + ex.getCause(),
+        request.getDescription(false));
   }
 
   /**

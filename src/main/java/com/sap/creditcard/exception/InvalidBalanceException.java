@@ -4,7 +4,7 @@ package com.sap.creditcard.exception;
 public class InvalidBalanceException extends RuntimeException {
 
   /**
-   * Instantiates a new Invalid credit card exception.
+   * Instantiates a new InvalidBalanceException
    *
    * @param msg the msg
    */

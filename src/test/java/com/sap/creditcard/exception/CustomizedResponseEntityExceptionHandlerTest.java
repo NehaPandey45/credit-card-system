@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -19,7 +20,7 @@ public class CustomizedResponseEntityExceptionHandlerTest {
   @Mock WebRequest webRequest;
 
   @Test
-  public void handleHttpRequestMethodNotSupported() {
+  public void handleHttpRequestMethodNotSupported_test() {
     CustomizedResponseEntityExceptionHandler handler =
         new CustomizedResponseEntityExceptionHandler();
     final ErrorMessage errorMessage =
@@ -29,7 +30,17 @@ public class CustomizedResponseEntityExceptionHandlerTest {
   }
 
   @Test
-  public void handleNoHandlerFoundException() {
+  public void handleHttpMessageNotReadableException_test() {
+    CustomizedResponseEntityExceptionHandler handler =
+        new CustomizedResponseEntityExceptionHandler();
+    final ErrorMessage errorMessage =
+        handler.handleHttpMessageNotReadableException(
+            new HttpMessageNotReadableException("message"), webRequest);
+    assertEquals(HttpStatus.NOT_FOUND.value(), errorMessage.getStatusCode());
+  }
+
+  @Test
+  public void handleNoHandlerFoundException_test() {
     CustomizedResponseEntityExceptionHandler handler =
         new CustomizedResponseEntityExceptionHandler();
     final ErrorMessage errorMessage =
@@ -39,7 +50,7 @@ public class CustomizedResponseEntityExceptionHandlerTest {
   }
 
   @Test
-  public void handleHttpMediaTypeNotSupported() {
+  public void handleHttpMediaTypeNotSupported_test() {
     CustomizedResponseEntityExceptionHandler handler =
         new CustomizedResponseEntityExceptionHandler();
     final ErrorMessage errorMessage =
@@ -49,7 +60,7 @@ public class CustomizedResponseEntityExceptionHandlerTest {
   }
 
   @Test
-  public void handleAllGlobalExceptionHandler() {
+  public void handleAllGlobalExceptionHandler_test() {
     CustomizedResponseEntityExceptionHandler handler =
         new CustomizedResponseEntityExceptionHandler();
     final ErrorMessage errorMessage =
@@ -58,7 +69,7 @@ public class CustomizedResponseEntityExceptionHandlerTest {
   }
 
   @Test
-  public void handleInvalidCrediCardException() {
+  public void handleInvalidCrediCardException_test() {
     CustomizedResponseEntityExceptionHandler handler =
         new CustomizedResponseEntityExceptionHandler();
     final ErrorMessage errorMessage =
@@ -68,7 +79,35 @@ public class CustomizedResponseEntityExceptionHandlerTest {
   }
 
   @Test
-  public void handleDataIntegrityViolationException() {
+  public void handleInvalidUserNameException_test() {
+    CustomizedResponseEntityExceptionHandler handler =
+        new CustomizedResponseEntityExceptionHandler();
+    final ErrorMessage errorMessage =
+        handler.handleInvalidUserNameException(new InvalidUserNameException("message"), webRequest);
+    assertEquals(HttpStatus.NOT_FOUND.value(), errorMessage.getStatusCode());
+  }
+
+  @Test
+  public void handleInvalidCreditLimitException_test() {
+    CustomizedResponseEntityExceptionHandler handler =
+        new CustomizedResponseEntityExceptionHandler();
+    final ErrorMessage errorMessage =
+        handler.handleInvalidCreditLimitException(
+            new InvalidCreditLimitException("message"), webRequest);
+    assertEquals(HttpStatus.NOT_FOUND.value(), errorMessage.getStatusCode());
+  }
+
+  @Test
+  public void handleInvalidBalanceException_test() {
+    CustomizedResponseEntityExceptionHandler handler =
+        new CustomizedResponseEntityExceptionHandler();
+    final ErrorMessage errorMessage =
+        handler.handleInvalidBalanceException(new InvalidBalanceException("message"), webRequest);
+    assertEquals(HttpStatus.NOT_FOUND.value(), errorMessage.getStatusCode());
+  }
+
+  @Test
+  public void handleDataIntegrityViolationException_test() {
     CustomizedResponseEntityExceptionHandler handler =
         new CustomizedResponseEntityExceptionHandler();
     final ErrorMessage errorMessage =

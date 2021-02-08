@@ -1,6 +1,8 @@
 package com.sap.creditcard.api;
 
+import com.sap.creditcard.exception.InvalidBalanceException;
 import com.sap.creditcard.exception.InvalidCrediCardException;
+import com.sap.creditcard.exception.InvalidCreditLimitException;
 import com.sap.creditcard.exception.InvalidUserNameException;
 import com.sap.creditcard.model.Creditcard;
 import com.sap.creditcard.service.CreditcardService;
@@ -67,12 +69,13 @@ public class CreditcardApi {
       } else if (bindingResult.hasFieldErrors("cardLimit")) {
 
         logger.error("Invalid cardLimit passed");
-        throw new InvalidUserNameException("Invalid cardLimit passed, please check input request");
+        throw new InvalidCreditLimitException(
+            "Invalid cardLimit passed, please check input request");
 
       } else if (bindingResult.hasFieldErrors("accountBalance")) {
 
         logger.error("Invalid accountBalance passed");
-        throw new InvalidUserNameException(
+        throw new InvalidBalanceException(
             "Invalid accountBalance passed, please check input request");
       }
     }

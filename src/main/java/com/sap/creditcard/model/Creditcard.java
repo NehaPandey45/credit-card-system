@@ -3,6 +3,7 @@ package com.sap.creditcard.model;
 import com.sap.creditcard.validation.annotation.CreditcardAnnotation;
 import java.math.BigDecimal;
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -33,7 +34,11 @@ public class Creditcard {
   @CreditcardAnnotation
   private String cardNumber;
 
-  @NotNull private BigDecimal cardLimit;
+  @NotNull
+  @Digits(integer = 9, fraction = 2)
+  private BigDecimal cardLimit;
 
-  @NotNull private BigDecimal accountBalance = BigDecimal.valueOf(0.0);
+  @NotNull
+  @Digits(integer = 10, fraction = 2)
+  private BigDecimal accountBalance = BigDecimal.valueOf(0.0);
 }
