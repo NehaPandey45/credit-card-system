@@ -35,6 +35,8 @@ In order to access and install this image on your local, please use below docker
 
 #In order to access swagger documentation please run below endpoint on your browser:
 http://<hostname>:8080/swagger-ui.html
+   
+Please refer test cases for sample data to be passed in POST request.
 
 On localhost, you can use:
 http://localhost:8080/swagger-ui.html
@@ -63,28 +65,6 @@ docker run \
   
   Please replace <localhost> with server IP, in order to run on Server.
   
- #Grafana
- 
- This application provides support to create dashboards on Grafana. 
- In order to install Grafana, please follow below steps:
- 
- 1) Install Grafana image on your system using below docker commands:
- 
- docker run -d --name=grafana -p 3000:3000 grafana/grafana
- 
- For more details, please refer the below link:
- https://hub.docker.com/r/grafana/grafana
- 
- 2) to run Grafana on your local, please use below command:
- 
- http://localhost:3000
- 
- Here we have used the default user ID/Pwd (admin/admin) for login
- 
- 3) Configure the Prometheus Datasource in Grafana 
- 
- 4) Go to Create -> Dashboard -> search for "JVM Dashboard". This is the default Dashboard which provides support to important metrics.
- 
  #To Format the Code we have used "fmt-maven-plugin". 
  
  #You can also generate the code coverage report for which we have used "Jacoco plugin"
