@@ -1,10 +1,10 @@
 package com.sap.creditcard.exception;
 
-import org.junit.jupiter.api.Test;
-import pl.pojo.tester.api.assertion.Method;
-
 import static pl.pojo.tester.api.FieldPredicate.exclude;
 import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
+
+import org.junit.jupiter.api.Test;
+import pl.pojo.tester.api.assertion.Method;
 
 public class ErrorMessageTest {
 
@@ -13,8 +13,8 @@ public class ErrorMessageTest {
     final Class<?> model = ErrorMessage.class;
 
     assertPojoMethodsFor(model, exclude("TYPE"))
-            .testing(Method.EQUALS)
-            .quickly()
+        .testing(Method.EQUALS)
+        .quickly()
         .areWellImplemented();
 
     assertPojoMethodsFor(model, exclude("TYPE"))

@@ -10,14 +10,13 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import java.util.List;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.List;
 
 /**
  * The Creditcard Controller Class. It provides 2 API to Save and add data. Please refer swagger
@@ -63,13 +62,13 @@ public class CreditcardApi {
 
         logger.error("Invalid Credit card Number passed");
         throw new InvalidCrediCardException(
-                "Invalid Credit card Number passed, please check input request");
+            "Invalid Credit card Number passed, please check input request");
 
       } else if (bindingResult.hasFieldErrors("accountBalance")) {
 
         logger.error("Invalid accountBalance passed");
         throw new InvalidBalanceException(
-                "Invalid accountBalance passed, please check input request");
+            "Invalid accountBalance passed, please check input request");
       } else if (bindingResult.hasFieldErrors("userName")) {
 
         logger.error("Invalid userName passed");
@@ -79,7 +78,7 @@ public class CreditcardApi {
 
         logger.error("Invalid cardLimit passed");
         throw new InvalidCreditLimitException(
-                "Invalid cardLimit passed, please check input request");
+            "Invalid cardLimit passed, please check input request");
       }
     }
   }

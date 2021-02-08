@@ -1,10 +1,10 @@
 package com.sap.creditcard.model;
 
-import org.junit.jupiter.api.Test;
-import pl.pojo.tester.api.assertion.Method;
-
 import static pl.pojo.tester.api.FieldPredicate.exclude;
 import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
+
+import org.junit.jupiter.api.Test;
+import pl.pojo.tester.api.assertion.Method;
 
 public class CreditcardTest {
 

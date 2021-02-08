@@ -1,8 +1,6 @@
 package com.sap.creditcard.exception;
 
-/**
- * The type Invalid credit card exception.
- */
+/** The type Invalid credit card exception. */
 public class GenericCreditCardAPIException extends RuntimeException {
 
   /**
