@@ -3,11 +3,16 @@ This system will accept credit card related data, will apply luhn validation and
 
 This is a spring-boot application that uses in-memory Database H2 to store and retrieve the Data.
 
-Pre-requisites
-1) maven
-2) Java 8 or higher
-3) docker
-4) IDE like IntelliJ/Eclipse
+#Technologies Stack Used in this API
+
+Spring Boot 2.3.6.RELEASE
+Spring Security 2.4.2
+Spring Data JPA 2.4.3
+H2 In-memory Database 1.4.200
+Tomcat Embed 
+JUnit 4.13.1
+Maven 3.6.3
+Java 8
 
 Run the Project
 #Option 1:
