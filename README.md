@@ -24,6 +24,12 @@ Run the Project
 5) In order to check the application is up and running click on /actuator/health API. You can use browser or postman or below curl command (for example: on localhost) hit the below command:
    curl --location --request GET 'http://localhost:8080/actuator/health'
 
+or you can use the command line with below commands
+
+$ git clone https://github.com/NehaPandey45/credit-card-system.git
+$ git pull 
+$ mvn: clean install
+$ mvn spring-boot:run
 
 #Option 2:
 
@@ -40,12 +46,54 @@ In order to access and install this image on your local, please use below docker
 
 #In order to access swagger documentation please run below endpoint on your browser:
 http://<hostname>:8080/swagger-ui.html
-   
-Please refer test cases for sample data to be passed in POST request.
-
 On localhost, you can use:
 http://localhost:8080/swagger-ui.html
 
+CURL Commands to access API
+
+This API is secured with JWT Authentication, so you will have to follow below steps:
+
+1) curl --location --request POST 'localhost:8080/authenticate' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: JSESSIONID=4F363B4B2D78F2A094DD6BA900EA11E8' \
+--data-raw '{
+	"username":<username>,
+	"password":<password>
+}'
+
+2) Once you recieve the Bearer Token from above command, then you need to pass the Bearer token in header
+   
+Example CURL command to access GETALL() data
+
+   curl --location --request GET 'http://localhost:8080/creditcard/getAll' \
+--header 'Authorization: Bearer <JWT TOKEN>' \
+--header 'Cookie: JSESSIONID=4F363B4B2D78F2A094DD6BA900EA11E8' \
+--data-raw ''
+
+3) To Add CreditCard
+
+curl --location --request POST 'http://localhost:8080/creditcard/add' \
+--header 'Authorization: Bearer <JWT TOKEN>' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: JSESSIONID=4F363B4B2D78F2A094DD6BA900EA11E8' \
+--data-raw '{
+ "userName" : <>,
+ "cardNumber" : <>,
+ "cardLimit": <>,
+ "accountBalance": <>"
+}'
+   
+4) For checking the health
+
+GET: http://<server IP: PORT>/actuator/health
+   
+5) For checking Metrics
+
+GET: http://<server IP: PORT>/actuator/Metrics
+
+
+#For further information on JWT , please refer READMEJWT.md
+   
 Further, this application provides additional functionalities as mentioned below:
 
 #Prometheus 
