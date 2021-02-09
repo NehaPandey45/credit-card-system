@@ -1,9 +1,13 @@
 package com.sap.creditcard.api;
 
 /**
- * The POST API gets username and password in the body- Using Spring Authentication Manager we
- * authenticate the username and password.If the credentials are valid, a JWT token is created using
- * the JWTTokenUtil and provided to the client.
+ * This controller recieves the request from the client "/authenticate" but in between this is
+ * intercepted by
+ *
+ * @link {JwtRequestFilter}
+ * <p>Further this will call AuthenticationManager to authenticate userName and Password If the
+ * credentials are valid a JWT token is created using JWTTokenUtil and provided to the client
+ * <p>This returns a valid JWT token if credentials passed are correct
  */
 
 import com.sap.creditcard.config.JwtTokenUtil;
@@ -18,9 +22,8 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -33,7 +36,7 @@ public class JwtAuthenticationController {
 
   @Autowired private JwtUserDetailsService userDetailsService;
 
-  @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+  @PostMapping(value = "/authenticate")
   public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
       throws Exception {
 

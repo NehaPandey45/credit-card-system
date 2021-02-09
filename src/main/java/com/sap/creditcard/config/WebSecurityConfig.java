@@ -15,6 +15,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * This class extends the WebSecurityConfigurerAdapter. This is a convenience class that allows
+ * customization to both WebSecurity and HttpSecurity.
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -45,29 +49,44 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     return super.authenticationManagerBean();
   }
 
+  /**
+   * /authenticate - permitAll - no Token is required /getAll and /add - Valid Token is required in
+   * header exceptionHandling - @link {JwtAuthenticationEntryPoint}
+   *
+   * @param httpSecurity
+   * @throws Exception
+   */
   @Override
   protected void configure(HttpSecurity httpSecurity) throws Exception {
-    // We don't need CSRF for this example
+    final String JWT_SECURE_ENDPOINT = "/creditcard/**";
+    final String AUTHENTICATE_ENDPOINT = "/authenticate";
+    final String SWAGGER_ENDPOINT = "/swagger-ui/**";
+
+    // We don't need CSRF for this app, so disabling
     httpSecurity
-        .csrf()
-        .disable()
-        // dont authenticate this particular request
-        .authorizeRequests()
-        .antMatchers("/authenticate")
-        .permitAll()
-        .
-        // all other requests need to be authenticated
-        anyRequest()
-        .authenticated()
-        .and()
-        .
-        // make sure we use stateless session; session won't be used to
-        // store user's state.
-        exceptionHandling()
-        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-        .and()
-        .sessionManagement()
-        .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+            .csrf()
+            .disable()
+            // dont authenticate this particular request
+            .authorizeRequests()
+            .antMatchers(AUTHENTICATE_ENDPOINT)
+            .permitAll()
+            .antMatchers(SWAGGER_ENDPOINT)
+            .permitAll()
+            .and()
+            // all other requests need to be authenticated
+
+            .authorizeRequests()
+            .antMatchers(JWT_SECURE_ENDPOINT)
+            .authenticated()
+            .and()
+
+            // make sure we use stateless session; session won't be used to
+            // store user's state.
+            .exceptionHandling()
+            .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+            .and()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
     // Add a filter to validate the tokens with every request
     httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
