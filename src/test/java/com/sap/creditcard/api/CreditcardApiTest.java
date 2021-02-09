@@ -33,7 +33,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class CreditcardApiTest {
 
   @InjectMocks
-  private CreditcardApi creditcardApi;
+  private CreditcardController creditcardApi;
 
   @Autowired
   private MockMvc mockMvc;
@@ -68,8 +68,8 @@ public class CreditcardApiTest {
             + "}";
 
     RequestBuilder requestBuilder =
-            MockMvcRequestBuilders.post(url)
-                    .contentType(APPLICATION_JSON_VALUE)
+        MockMvcRequestBuilders.post(url)
+            .contentType(APPLICATION_JSON_VALUE)
             .content(requestJSONContent);
 
     MvcResult result = mockMvc.perform(requestBuilder).andReturn();
@@ -89,8 +89,8 @@ public class CreditcardApiTest {
             + "}";
 
     RequestBuilder requestBuilder =
-            MockMvcRequestBuilders.post(url)
-                    .contentType(APPLICATION_JSON_VALUE)
+        MockMvcRequestBuilders.post(url)
+            .contentType(APPLICATION_JSON_VALUE)
             .content(requestJSONContent);
 
     MvcResult result = mockMvc.perform(requestBuilder).andReturn();
@@ -109,8 +109,8 @@ public class CreditcardApiTest {
             + "}";
 
     RequestBuilder requestBuilder =
-            MockMvcRequestBuilders.post(url)
-                    .contentType(APPLICATION_JSON_VALUE)
+        MockMvcRequestBuilders.post(url)
+            .contentType(APPLICATION_JSON_VALUE)
             .content(requestJSONContent);
 
     assertEquals(404, mockMvc.perform(requestBuilder).andReturn().getResponse().getStatus());
@@ -128,8 +128,8 @@ public class CreditcardApiTest {
             + "}";
 
     RequestBuilder requestBuilder =
-            MockMvcRequestBuilders.post(url)
-                    .contentType(APPLICATION_JSON_VALUE)
+        MockMvcRequestBuilders.post(url)
+            .contentType(APPLICATION_JSON_VALUE)
             .content(requestJSONContent);
 
     MvcResult result = mockMvc.perform(requestBuilder).andReturn();
@@ -149,8 +149,8 @@ public class CreditcardApiTest {
             + "}";
 
     RequestBuilder requestBuilder =
-            MockMvcRequestBuilders.post(url)
-                    .contentType(APPLICATION_JSON_VALUE)
+        MockMvcRequestBuilders.post(url)
+            .contentType(APPLICATION_JSON_VALUE)
             .content(requestJSONContent);
 
     MvcResult result = mockMvc.perform(requestBuilder).andReturn();
@@ -162,17 +162,17 @@ public class CreditcardApiTest {
     final String url = "/creditcard/add";
 
     final String requestJSONContent =
-            "{\n"
-                    + " \"userName\" : \"test1\",\n"
-                    + " \"cardNumber\" : \"12345678903555\",\n"
-                    + " \"cardLimit\": \"2\",\n"
-                    + " \"accountBalance\": \"\"\n"
-                    + "}";
+        "{\n"
+            + " \"userName\" : \"test1\",\n"
+            + " \"cardNumber\" : \"12345678903555\",\n"
+            + " \"cardLimit\": \"2\",\n"
+            + " \"accountBalance\": \"\"\n"
+            + "}";
 
     RequestBuilder requestBuilder =
-            MockMvcRequestBuilders.post(url)
-                    .contentType(APPLICATION_JSON_VALUE)
-                    .content(requestJSONContent);
+        MockMvcRequestBuilders.post(url)
+            .contentType(APPLICATION_JSON_VALUE)
+            .content(requestJSONContent);
 
     MvcResult result = mockMvc.perform(requestBuilder).andReturn();
     assertEquals(404, result.getResponse().getStatus());
@@ -183,16 +183,16 @@ public class CreditcardApiTest {
     final String url = "/creditcard/add";
 
     final String requestJSONContent =
-            "{\n"
-                    + " \"userName\" : \"test1\",\n"
-                    + " \"cardNumber\" : \"12345678903555\",\n"
-                    + " \"cardLimit\": \"2\"\n"
-                    + "}";
+        "{\n"
+            + " \"userName\" : \"test1\",\n"
+            + " \"cardNumber\" : \"12345678903555\",\n"
+            + " \"cardLimit\": \"2\"\n"
+            + "}";
 
     RequestBuilder requestBuilder =
-            MockMvcRequestBuilders.post(url)
-                    .contentType(APPLICATION_JSON_VALUE)
-                    .content(requestJSONContent);
+        MockMvcRequestBuilders.post(url)
+            .contentType(APPLICATION_JSON_VALUE)
+            .content(requestJSONContent);
 
     MvcResult result = mockMvc.perform(requestBuilder).andReturn();
     assertEquals(200, result.getResponse().getStatus());
@@ -203,16 +203,16 @@ public class CreditcardApiTest {
     final String url = "/creditcard/add";
 
     final String requestJSONContent =
-            "{\n"
-                    + " \"userName\" : \"testUser3\",\n"
-                    + " \"cardNumber\" : \"12345678903555\",\n"
-                    + " \"cardlimit\": \"\"\n"
-                    + "}";
+        "{\n"
+            + " \"userName\" : \"testUser3\",\n"
+            + " \"cardNumber\" : \"12345678903555\",\n"
+            + " \"cardlimit\": \"\"\n"
+            + "}";
 
     RequestBuilder requestBuilder =
-            MockMvcRequestBuilders.post(url)
-                    .contentType(APPLICATION_JSON_VALUE)
-                    .content(requestJSONContent);
+        MockMvcRequestBuilders.post(url)
+            .contentType(APPLICATION_JSON_VALUE)
+            .content(requestJSONContent);
 
     MvcResult result = mockMvc.perform(requestBuilder).andReturn();
     assertEquals(400, result.getResponse().getStatus());
@@ -225,9 +225,9 @@ public class CreditcardApiTest {
     final String requestJSONContent = "";
 
     RequestBuilder requestBuilder =
-            MockMvcRequestBuilders.post(url)
-                    .contentType(APPLICATION_JSON_VALUE)
-                    .content(requestJSONContent);
+        MockMvcRequestBuilders.post(url)
+            .contentType(APPLICATION_JSON_VALUE)
+            .content(requestJSONContent);
 
     MvcResult result = mockMvc.perform(requestBuilder).andReturn();
     assertEquals(400, result.getResponse().getStatus());
