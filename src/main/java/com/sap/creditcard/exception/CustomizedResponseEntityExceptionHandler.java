@@ -1,5 +1,6 @@
 package com.sap.creditcard.exception;
 
+import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -13,8 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.NoHandlerFoundException;
-
-import java.util.Date;
 
 /**
  * This is Customized response entity class that handles the exception and returns the Error as per
@@ -120,32 +119,32 @@ public class CustomizedResponseEntityExceptionHandler {
   protected ErrorMessage handleConflict(DataIntegrityViolationException ex, WebRequest request) {
 
     return new ErrorMessage(
-            HttpStatus.NOT_ACCEPTABLE.value(),
-            new Date(),
-            "Unique index or primary key violation, please check Input parameters",
-            request.getDescription(false));
+        HttpStatus.NOT_ACCEPTABLE.value(),
+        new Date(),
+        "Unique index or primary key violation, please check Input parameters",
+        request.getDescription(false));
   }
 
   /**
    * GenericCreditCardAPIException
    *
-   * @param ex      the exception
+   * @param ex the exception
    * @param request request
    * @return errorMessage
    */
   @ExceptionHandler(value = {GenericCreditCardAPIException.class})
   @ResponseStatus(value = HttpStatus.NOT_FOUND)
   protected ErrorMessage handleGenericCreditCardAPIException(
-          GenericCreditCardAPIException ex, WebRequest request) {
+      GenericCreditCardAPIException ex, WebRequest request) {
 
     return new ErrorMessage(
-            HttpStatus.NOT_FOUND.value(), new Date(), ex.getMessage(), request.getDescription(false));
+        HttpStatus.NOT_FOUND.value(), new Date(), ex.getMessage(), request.getDescription(false));
   }
 
   /**
    * GlobalExceptionHandler
    *
-   * @param ex      the exception
+   * @param ex the exception
    * @param request the request
    * @return ErrorMessage
    */
