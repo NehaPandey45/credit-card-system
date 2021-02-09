@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity httpSecurity) throws Exception {
     final String JWT_SECURE_ENDPOINT = "/creditcard/**";
     final String AUTHENTICATE_ENDPOINT = "/authenticate";
-    final String SWAGGER_ENDPOINT = "/swagger-ui/**";
+    final String SWAGGER_ENDPOINT = "/swagger-ui";
 
     // We don't need CSRF for this app, so disabling
     httpSecurity
