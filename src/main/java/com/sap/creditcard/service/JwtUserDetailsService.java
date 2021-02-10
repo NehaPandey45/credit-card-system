@@ -1,12 +1,11 @@
 package com.sap.creditcard.service;
 
+import java.util.ArrayList;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 /**
  * This service loads the userName and Password as per the userName passed in the parameter.
@@ -28,9 +27,9 @@ public class JwtUserDetailsService implements UserDetailsService {
     final String userName = "test";
     if (userName.equals(username)) {
       return new User(
-              userName,
-              "$2a$10$cluoi/Lvix8ladV3RdLQIeUZZJO85Oe3iiiXpXs3Wlc4nmgwuO1cW",
-              new ArrayList<>());
+          userName,
+          "$2a$10$cluoi/Lvix8ladV3RdLQIeUZZJO85Oe3iiiXpXs3Wlc4nmgwuO1cW",
+          new ArrayList<>());
     } else {
       throw new UsernameNotFoundException("User not found with username: " + username);
     }

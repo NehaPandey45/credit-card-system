@@ -5,9 +5,9 @@ package com.sap.creditcard.api;
  * intercepted by
  *
  * @link {JwtRequestFilter}
- * <p>Further this will call AuthenticationManager to authenticate userName and Password If the
- * credentials are valid a JWT token is created using JWTTokenUtil and provided to the client
- * <p>This returns a valid JWT token if credentials passed are correct
+ *     <p>Further this will call AuthenticationManager to authenticate userName and Password If the
+ *     credentials are valid a JWT token is created using JWTTokenUtil and provided to the client
+ *     <p>This returns a valid JWT token if credentials passed are correct
  */
 
 import com.sap.creditcard.config.JwtTokenUtil;

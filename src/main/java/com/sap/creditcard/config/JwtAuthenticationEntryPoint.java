@@ -1,17 +1,14 @@
 package com.sap.creditcard.config;
 
+import java.io.IOException;
+import java.io.Serializable;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.Serializable;
-
-/**
- * Handles all unauthorized request
- */
+/** Handles all unauthorized request */
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Serializable {
 
@@ -19,10 +16,10 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Se
 
   @Override
   public void commence(
-          HttpServletRequest request,
-          HttpServletResponse response,
-          AuthenticationException authException)
-          throws IOException {
+      HttpServletRequest request,
+      HttpServletResponse response,
+      AuthenticationException authException)
+      throws IOException {
 
     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
   }
