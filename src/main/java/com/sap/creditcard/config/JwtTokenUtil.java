@@ -4,19 +4,16 @@ import com.sap.creditcard.util.Constants;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
-/**
- * This is a Util class that provides methods to generate and validate JWT Token
- */
+/** This is a Util class that provides methods to generate and validate JWT Token */
 @Component
 public class JwtTokenUtil implements Serializable {
 
@@ -66,13 +63,13 @@ public class JwtTokenUtil implements Serializable {
   //   compaction of the JWT to a URL-safe string
   private String doGenerateToken(Map<String, Object> claims, String subject) {
 
-      return Jwts.builder()
-              .setClaims(claims)
-              .setSubject(subject)
-              .setIssuedAt(new Date(System.currentTimeMillis()))
-              .setExpiration(new Date(System.currentTimeMillis() + Constants.JWT_TOKEN_VALIDITY * 1000))
-              .signWith(SignatureAlgorithm.HS512, secret)
-              .compact();
+    return Jwts.builder()
+        .setClaims(claims)
+        .setSubject(subject)
+        .setIssuedAt(new Date(System.currentTimeMillis()))
+        .setExpiration(new Date(System.currentTimeMillis() + Constants.JWT_TOKEN_VALIDITY * 1000))
+        .signWith(SignatureAlgorithm.HS512, secret)
+        .compact();
   }
 
   // validate token: if Token has valid userName and token is not expired

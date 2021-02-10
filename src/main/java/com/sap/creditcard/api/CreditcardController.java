@@ -7,14 +7,13 @@ import com.sap.creditcard.exception.InvalidUserNameException;
 import com.sap.creditcard.model.Creditcard;
 import com.sap.creditcard.service.CreditcardService;
 import io.swagger.annotations.*;
+import java.util.List;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.List;
 
 /**
  * The Creditcard Controller Class. It provides 2 API to Save and add data. Please refer swagger
@@ -25,15 +24,14 @@ import java.util.List;
 @Api(value = "Credit card provider, Protected by JWT", produces = "application/json")
 public class CreditcardController {
 
-  @Autowired
-  CreditcardService creditcardService;
+  @Autowired CreditcardService creditcardService;
 
   Logger logger = LoggerFactory.getLogger(this.getClass());
 
   @ApiOperation(
-          value =
-                  "Create a new credit card for a given name, card number that passes luhn10 algorithm, limit and balance",
-          authorizations = {@Authorization(value = "swaggertoken")}
+    value =
+        "Create a new credit card for a given name, card number that passes luhn10 algorithm, limit and balance",
+    authorizations = {@Authorization(value = "swaggertoken")}
   )
   @ApiResponses(
     value = {
@@ -76,15 +74,15 @@ public class CreditcardController {
       } else if (bindingResult.hasFieldErrors("cardLimit")) {
 
         logger.error("Invalid cardLimit passed");
-          throw new InvalidCreditLimitException(
-                  "Invalid cardLimit passed, please check input request");
+        throw new InvalidCreditLimitException(
+            "Invalid cardLimit passed, please check input request");
       }
     }
   }
 
   @ApiOperation(
-          value = "Returns all cards in the system, Protected by JWT",
-          authorizations = {@Authorization(value = "swaggertoken")}
+    value = "Returns all cards in the system, Protected by JWT",
+    authorizations = {@Authorization(value = "swaggertoken")}
   )
   @GetMapping("/getAll")
   public List<Creditcard> getAll() {

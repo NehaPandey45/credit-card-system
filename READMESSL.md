@@ -18,3 +18,8 @@ keytool -genkeypair -alias selfsigned_localhost_sslserver -keyalg RSA -keysize 2
 
 #Once the certificate is generated place the certificate in the src/main/resources folder
 
+#As of now this certificate is not working and hence we have disabled https 
+
+#TODO: The certificate should be signed by authorized CA and needs to be re-generated with authorized CA. Please refer above steps
+
+

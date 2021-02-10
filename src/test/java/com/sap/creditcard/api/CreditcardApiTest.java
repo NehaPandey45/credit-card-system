@@ -1,7 +1,14 @@
 package com.sap.creditcard.api;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 import com.sap.creditcard.model.Creditcard;
 import com.sap.creditcard.service.CreditcardService;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,24 +26,14 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class CreditcardApiTest {
 
-  @InjectMocks
-  private CreditcardController creditcardApi;
+  @InjectMocks private CreditcardController creditcardApi;
 
-  @Autowired
-  private MockMvc mockMvc;
+  @Autowired private MockMvc mockMvc;
 
   @Mock private CreditcardService creditcardService;
 
