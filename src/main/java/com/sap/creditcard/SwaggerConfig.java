@@ -35,14 +35,14 @@ public class SwaggerConfig {
   }
 
   private ApiInfo apiInfo() {
-    return new ApiInfo(
-            "CreditCardProcessingSystem",
-            "This Restful API allows you to add new credit card accounts and view them as a list.",
-            "v1",
-            "Terms of service",
-            "nehagupta.pandey@gmail.com",
-            "License of API",
-            "https://swagger.io/docs/");
+      return new ApiInfo(
+              "CreditCardProcessingSystem",
+              "This Restful API allows you to add new credit card accounts and view them as a list.",
+              "v1",
+              "Terms of service",
+              "nehagupta.pandey@gmail.com",
+              "License of API",
+              "https://swagger.io/docs/");
   }
 
   private ApiKey apiKey() {

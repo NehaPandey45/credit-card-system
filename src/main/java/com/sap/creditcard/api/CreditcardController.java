@@ -76,8 +76,8 @@ public class CreditcardController {
       } else if (bindingResult.hasFieldErrors("cardLimit")) {
 
         logger.error("Invalid cardLimit passed");
-        throw new InvalidCreditLimitException(
-                "Invalid cardLimit passed, please check input request");
+          throw new InvalidCreditLimitException(
+                  "Invalid cardLimit passed, please check input request");
       }
     }
   }

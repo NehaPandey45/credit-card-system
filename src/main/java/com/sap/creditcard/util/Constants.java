@@ -13,5 +13,5 @@ public class Constants {
   /**
    * JWT
    */
-  public static final long JWT_TOKEN_VALIDITY = 0 * 30 * 60; // Valid for 30mins
+  public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60; // Valid for 5 hrs
 }

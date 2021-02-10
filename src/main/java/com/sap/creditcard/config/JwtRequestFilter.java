@@ -27,26 +27,26 @@ import java.io.IOException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
   Logger logger = LoggerFactory.getLogger(this.getClass());
-  @Autowired
-  private JwtUserDetailsService jwtUserDetailsService;
+    @Autowired
+    private JwtUserDetailsService jwtUserDetailsService;
 
-  @Autowired
-  private JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
-  @Override
-  protected void doFilterInternal(
-          HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-          throws ServletException, IOException {
+    @Override
+    protected void doFilterInternal(
+            HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+            throws ServletException, IOException {
 
-    final String requestTokenHeader = request.getHeader("Authorization");
+        final String requestTokenHeader = request.getHeader("Authorization");
 
-    String username = null;
-    String jwtToken = null;
-    // JWT Token is in the form "Bearer token". Remove Bearer word and get
-    // only the Token
-    final String tokenBearerSubstring = "Bearer ";
-    if (requestTokenHeader != null && requestTokenHeader.startsWith(tokenBearerSubstring)) {
-      jwtToken = requestTokenHeader.substring(tokenBearerSubstring.length());
+        String username = null;
+        String jwtToken = null;
+        // JWT Token is in the form "Bearer token". Remove Bearer word and get
+        // only the Token
+        final String tokenBearerSubstring = "Bearer ";
+        if (requestTokenHeader != null && requestTokenHeader.startsWith(tokenBearerSubstring)) {
+            jwtToken = requestTokenHeader.substring(tokenBearerSubstring.length());
       try {
         username = jwtTokenUtil.getUsernameFromToken(jwtToken);
       } catch (IllegalArgumentException e) {
@@ -55,8 +55,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         logger.error("JWT Token has expired");
       }
     } else {
-      logger.error(
-              "JWT Token does not begin with Bearer String, please make sure to pass Bearer and then a space in the header.");
+            logger.error(
+                    "JWT Token does not begin with Bearer String, please make sure to pass Bearer and then a space in the header.");
     }
 
     // Once we get the token validate it.
@@ -68,11 +68,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
       // authentication
       if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
 
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
-        usernamePasswordAuthenticationToken.setDetails(
-                new WebAuthenticationDetailsSource().buildDetails(request));
+          UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                  new UsernamePasswordAuthenticationToken(
+                          userDetails, null, userDetails.getAuthorities());
+          usernamePasswordAuthenticationToken.setDetails(
+                  new WebAuthenticationDetailsSource().buildDetails(request));
         // After setting the Authentication in the context, we specify
         // that the current user is authenticated. So it passes the
         // Spring Security Configurations successfully.
