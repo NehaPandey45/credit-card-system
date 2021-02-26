@@ -2,11 +2,6 @@ package com.sap.creditcard.config;
 
 import com.sap.creditcard.service.JwtUserDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
-import java.io.IOException;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +11,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * For any incoming request, this Filter extends class gets executed. It checks if the request has a
@@ -52,8 +53,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         logger.error("JWT Token has expired");
       }
     } else {
-      logger.error(
-          "JWT Token does not begin with Bearer String, please make sure to pass Bearer and then a space in the header.");
+      logger.debug(
+              "JWT Token does not begin with Bearer String, please make sure to pass Bearer and then a space in the header.");
     }
 
     // Once we get the token validate it.
